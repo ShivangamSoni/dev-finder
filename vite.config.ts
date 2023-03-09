@@ -12,6 +12,10 @@ export default defineConfig({
                 find: "@components",
                 replacement: resolve(__dirname, "src", "components"),
             },
+            {
+                find: "@layouts",
+                replacement: resolve(__dirname, "src", "layouts"),
+            },
         ],
     },
 });
