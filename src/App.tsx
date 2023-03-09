@@ -1,7 +1,11 @@
+import Header from "@components/Header";
+
 export default function App() {
     return (
-        <>
-            <h1>App</h1>
-        </>
+        <div className="font-space h-screen bg-darkBlue500 flex items-center justify-center">
+            <div className="max-w-screen-md w-10/12">
+                <Header />
+            </div>
+        </div>
     );
 }
