@@ -5,7 +5,7 @@ export default function SearchBar() {
         <form className="flex justify-between gap-2">
             <label className="block flex-1 relative">
                 <span
-                    className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none"
+                    className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none text-blue"
                     aria-hidden="true"
                 >
                     <SearchIcon />
