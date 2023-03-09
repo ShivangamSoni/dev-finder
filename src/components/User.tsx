@@ -10,17 +10,19 @@ import Link from "./Link";
 
 export default function User() {
     return (
-        <div className="grid gap-6 py-4">
-            <div className="grid grid-cols-[auto_1fr] gap-4">
+        <div className="grid gap-6 py-4 md:grid-cols-[11rem_1fr]">
+            <div className="grid grid-cols-[auto_1fr] gap-4 md:row-start-1 md:col-span-2 md:gap-x-8">
                 <img
-                    className="w-16 h-16 sm:w-28 sm:h-28 rounded-full object-top object-cover"
+                    className="w-16 h-16 sm:w-28 sm:h-28 md:w-40 md:h-40 md:row-span-2 rounded-full object-top object-cover"
                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
                     alt="User"
                 />
-                <div className="grid">
-                    <h2 className="text-lg sm:text-xl font-semibold">User</h2>
+                <div className="grid md:grid-cols-2">
+                    <h2 className="text-lg sm:text-xl md:text-3xl font-semibold">
+                        User
+                    </h2>
                     <Link
-                        className="text-xs sm:text-base text-blue"
+                        className="text-xs sm:text-base md:text-lg text-blue"
                         target="_blank"
                         href={"https://github.com/username"}
                         aria-label="GitHub Profile"
@@ -28,16 +30,18 @@ export default function User() {
                     >
                         @Username
                     </Link>
-                    <time>Joined 19 Mar 2023</time>
+                    <time className="md:row-start-1 md:col-start-2 md:text-right">
+                        Joined 19 Mar 2023
+                    </time>
                 </div>
-                <p className="col-span-2 text-base">
+                <p className="col-span-2 md:col-auto text-base">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                     Eaque molestias reprehenderit veniam! Molestiae officia,
                     iste voluptatem est quibusdam soluta hic.
                 </p>
             </div>
 
-            <div className="grid gap-6">
+            <div className="grid gap-6 md:col-start-2">
                 <ul className="flex items-center justify-between flex-wrap p-6 rounded-lg bg-darkBlue500">
                     <Stat label="Repos" value="34" />
                     <Stat label="Followers" value="40" />
@@ -55,18 +59,18 @@ export default function User() {
                         Denmark
                     </Info>
                     <Info
-                        label="Users Personal Website/Blog"
-                        url="https://YouTube.com/"
-                        icon={LinkIcon}
-                    >
-                        https://www.youtube.com/
-                    </Info>
-                    <Info
                         label="Users Twitter Handle"
                         url={`https://twitter.com/${"UserHandle"}`}
                         icon={TwitterIcon}
                     >
                         @UserHandle
+                    </Info>
+                    <Info
+                        label="Users Personal Website/Blog"
+                        url="https://YouTube.com/"
+                        icon={LinkIcon}
+                    >
+                        https://www.youtube.com/
                     </Info>
                     <Info
                         label="Organization the user is Associated to"
@@ -100,13 +104,13 @@ const Info = ({
     icon: IconType;
 }) => (
     <li
-        className={`flex items-center gap-2 text-base ${
+        className={`flex items-center gap-2 text-base md:text-sm ${
             !url ? "text-grey" : "text-white"
         }`}
         aria-label={label}
         title={label}
     >
-        <span className="text-xl">
+        <span>
             <Icon />
         </span>
         {!url ? (
