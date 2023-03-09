@@ -3,7 +3,7 @@ import { BsSearch as SearchIcon } from "react-icons/bs";
 export default function SearchBar() {
     return (
         <form className="flex justify-between gap-2">
-            <label className="block flex-1 relative">
+            <label className="block flex-1 relative sm:text-base">
                 <span
                     className="absolute inset-y-0 left-0 flex items-center pl-2 pointer-events-none text-blue"
                     aria-hidden="true"
@@ -18,7 +18,7 @@ export default function SearchBar() {
                 />
             </label>
 
-            <button className="font-semibold border-none outline-none p-2 bg-blue rounded-lg ring-1 ring-transparent focus:ring-white">
+            <button className="sm:text-base font-semibold border-none outline-none p-2 bg-blue rounded-lg ring-1 ring-transparent focus:ring-white">
                 Search
             </button>
         </form>

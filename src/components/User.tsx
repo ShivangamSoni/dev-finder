@@ -13,14 +13,14 @@ export default function User() {
         <div className="grid gap-6 py-4">
             <div className="grid grid-cols-[auto_1fr] gap-4">
                 <img
-                    className="w-16 h-16 rounded-full object-top object-cover"
+                    className="w-16 h-16 sm:w-28 sm:h-28 rounded-full object-top object-cover"
                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
                     alt="User"
                 />
                 <div className="grid">
-                    <h2 className="text-lg font-semibold">User</h2>
+                    <h2 className="text-lg sm:text-xl font-semibold">User</h2>
                     <Link
-                        className="text-xs text-blue"
+                        className="text-xs sm:text-base text-blue"
                         target="_blank"
                         href={"https://github.com/username"}
                         aria-label="GitHub Profile"
@@ -44,7 +44,7 @@ export default function User() {
                     <Stat label="Following" value="90" />
                 </ul>
 
-                <ul className="grid gap-4">
+                <ul className="grid gap-4 sm:grid-cols-2">
                     <Info
                         label="Users Location"
                         url={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -83,8 +83,8 @@ export default function User() {
 
 const Stat = ({ label, value }: { label: string; value: string }) => (
     <li className="grid text-center gap-2">
-        <span className="text-grey text-xs">{label}</span>
-        <span className="font-semibold text-base">{value}</span>
+        <span className="text-grey text-xs sm:text-base">{label}</span>
+        <span className="font-semibold text-base sm:text-lg">{value}</span>
     </li>
 );
 
