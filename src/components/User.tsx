@@ -1,3 +1,9 @@
+import { type ReactNode } from "react";
+import { type Endpoints } from "@octokit/types";
+
+import { numberFormatter } from "@utils/numberFormatter";
+import { dateFormatter } from "@utils/dateFormatter";
+
 import { type IconType } from "react-icons";
 import {
     ImLocation as LocationIcon,
@@ -5,79 +11,126 @@ import {
     ImTwitter as TwitterIcon,
 } from "react-icons/im";
 import { BsBuildingsFill as OrganizationIcon } from "react-icons/bs";
-import { ReactNode } from "react";
+
 import Link from "./Link";
 
-export default function User() {
+export type UserData = Endpoints["GET /users/{username}"]["response"]["data"];
+
+export default function User({
+    avatar_url,
+    login: username,
+    name,
+    html_url,
+    created_at,
+    bio,
+    public_repos,
+    followers,
+    following,
+    location,
+    twitter_username,
+    blog,
+    company,
+}: UserData) {
+    const displayName = name || username;
+    const joiningDate = dateFormatter.format(new Date(created_at));
+
     return (
         <div className="grid gap-6 py-4 md:grid-cols-[11rem_1fr]">
             <div className="grid grid-cols-[auto_1fr] gap-4 md:row-start-1 md:col-span-2 md:gap-x-8">
                 <img
                     className="w-16 h-16 sm:w-28 sm:h-28 md:w-40 md:h-40 md:row-span-2 rounded-full object-top object-cover"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                    alt="User"
+                    src={avatar_url}
+                    alt={displayName}
                 />
-                <div className="grid md:grid-cols-2">
+                <div className="grid md:grid-cols-[1fr_auto]">
                     <h2 className="text-lg sm:text-xl md:text-3xl font-semibold">
-                        User
+                        {displayName}
                     </h2>
                     <Link
                         className="text-xs sm:text-base md:text-lg text-blue"
                         target="_blank"
-                        href={"https://github.com/username"}
-                        aria-label="GitHub Profile"
-                        title="GitHub Profile"
+                        href={html_url}
+                        aria-label={`${displayName}s' GitHub Profile`}
+                        title={`${displayName}s' GitHub Profile`}
                     >
-                        @Username
+                        @{username}
                     </Link>
                     <time className="md:row-start-1 md:col-start-2 md:text-right">
-                        Joined 19 Mar 2023
+                        Joined {joiningDate}
                     </time>
                 </div>
-                <p className="col-span-2 md:col-auto text-base">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Eaque molestias reprehenderit veniam! Molestiae officia,
-                    iste voluptatem est quibusdam soluta hic.
+                <p
+                    className={`col-span-2 md:col-auto text-base ${
+                        bio === null ? "text-grey" : ""
+                    }`}
+                >
+                    {bio || "This profile has no Bio."}
                 </p>
             </div>
 
             <div className="grid gap-6 md:col-start-2">
                 <ul className="flex items-center justify-between flex-wrap p-6 rounded-lg bg-darkBlue500">
-                    <Stat label="Repos" value="34" />
-                    <Stat label="Followers" value="40" />
-                    <Stat label="Following" value="90" />
+                    <Stat
+                        label="Repos"
+                        value={numberFormatter.format(public_repos)}
+                    />
+                    <Stat
+                        label="Followers"
+                        value={numberFormatter.format(followers)}
+                    />
+                    <Stat
+                        label="Following"
+                        value={numberFormatter.format(following)}
+                    />
                 </ul>
 
                 <ul className="grid gap-4 sm:grid-cols-2">
                     <Info
-                        label="Users Location"
-                        url={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                            "Denmark",
-                        )}`}
+                        label={`${displayName}s' Location`}
+                        url={
+                            location
+                                ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                      location,
+                                  )}`
+                                : null
+                        }
                         icon={LocationIcon}
                     >
-                        Denmark
+                        {location || "Not Available"}
                     </Info>
                     <Info
-                        label="Users Twitter Handle"
-                        url={`https://twitter.com/${"UserHandle"}`}
+                        label={`${displayName}s' Twitter Handle`}
+                        url={
+                            twitter_username
+                                ? `https://twitter.com/${twitter_username}`
+                                : null
+                        }
                         icon={TwitterIcon}
                     >
-                        @UserHandle
+                        {twitter_username || "Not Available"}
                     </Info>
                     <Info
-                        label="Users Personal Website/Blog"
-                        url="https://YouTube.com/"
+                        label={`${displayName}s' Personal Website/Blog`}
+                        url={blog}
                         icon={LinkIcon}
                     >
-                        https://www.youtube.com/
+                        {blog || "Not Available"}
                     </Info>
                     <Info
-                        label="Organization the user is Associated to"
-                        url={`https://github.com/${"usercorp"}`}
+                        label={`${displayName} is Associated to ${
+                            company || "No Organization"
+                        }`}
+                        url={
+                            company
+                                ? `https://github.com/${company.replace(
+                                      "@",
+                                      "",
+                                  )}`
+                                : null
+                        }
                         icon={OrganizationIcon}
                     >
-                        @UserCorp
+                        {company || "Not Available"}
                     </Info>
                 </ul>
             </div>
