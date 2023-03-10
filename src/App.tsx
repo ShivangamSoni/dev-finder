@@ -4,6 +4,8 @@ import { request } from "@octokit/request";
 
 import { toast } from "react-hot-toast";
 
+import { useLocalStorage } from "@hooks/useLocalStorage";
+
 import Header from "@components/Header";
 import SearchBar from "@components/SearchBar";
 import User, { type UserData } from "@components/User";
@@ -13,6 +15,7 @@ import Section from "@layouts/Section";
 
 export default function App() {
     const [username, setUsername] = useState("ShivangamSoni");
+    const [theme, setTheme] = useLocalStorage<"dark" | "light">("theme");
     const {
         data: userData,
         refetch,
@@ -37,13 +40,34 @@ export default function App() {
     );
 
     useEffect(() => {
+        // return if already set either Automatically or by user preference
+        if (theme) return;
+        const dark = window.matchMedia("(prefers-color-scheme: dark)");
+        setTheme(dark ? "dark" : "light");
+    }, [theme]);
+
+    useEffect(() => {
         refetch();
     }, [username]);
 
+    useEffect(() => {
+        const body = document.body;
+        if (theme === "dark") {
+            body.classList.add("dark");
+        } else {
+            body.classList.remove("dark");
+        }
+    }, [theme]);
+
     return (
-        <div className="font-space min-h-screen bg-darkBlue500 text-white flex items-center justify-center py-8">
+        <div className="font-space min-h-screen bg-lightBlue50 text-grey dark:bg-darkBlue500 dark:text-white flex items-center justify-center py-8">
             <div className="max-w-screen-md w-10/12">
-                <Header />
+                <Header
+                    isDark={theme === "dark"}
+                    onToggleTheme={() =>
+                        setTheme((prev) => (prev === "dark" ? "light" : "dark"))
+                    }
+                />
                 <main className="grid gap-4">
                     <Section>
                         <SearchBar

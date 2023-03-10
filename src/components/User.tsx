@@ -43,7 +43,7 @@ export default function User({
                     alt={displayName}
                 />
                 <div className="grid md:grid-cols-[1fr_auto]">
-                    <h2 className="text-lg sm:text-xl md:text-3xl font-semibold">
+                    <h2 className="text-lg sm:text-xl md:text-3xl font-semibold text-black dark:text-white">
                         {displayName}
                     </h2>
                     <Link
@@ -69,7 +69,7 @@ export default function User({
             </div>
 
             <div className="grid gap-6 md:col-start-2">
-                <ul className="flex items-center justify-between flex-wrap p-6 rounded-lg bg-darkBlue500">
+                <ul className="flex items-center justify-between flex-wrap p-6 rounded-lg bg-lightBlue50 dark:bg-darkBlue500">
                     <Stat
                         label="Repos"
                         value={numberFormatter.format(public_repos)}
@@ -141,7 +141,9 @@ export default function User({
 const Stat = ({ label, value }: { label: string; value: string }) => (
     <li className="grid text-center gap-2">
         <span className="text-grey text-xs sm:text-base">{label}</span>
-        <span className="font-semibold text-base sm:text-lg">{value}</span>
+        <span className="text-black dark:text-white font-semibold text-base sm:text-lg">
+            {value}
+        </span>
     </li>
 );
 
@@ -158,7 +160,7 @@ const Info = ({
 }) => (
     <li
         className={`flex items-center gap-2 text-base md:text-sm ${
-            !url ? "text-grey" : "text-white"
+            !url ? "text-grey" : "text-lightBlue500 dark:text-white"
         }`}
         aria-label={label}
         title={label}
