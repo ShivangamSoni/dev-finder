@@ -35,7 +35,15 @@ export default function User({
     const joiningDate = dateFormatter.format(new Date(created_at));
 
     return (
-        <div className="grid gap-6 py-4 md:grid-cols-[11rem_1fr]">
+        <div className="grid gap-6 py-4 md:grid-cols-[11rem_1fr] relative">
+            {username === "ShivangamSoni" && (
+                <span
+                    className="absolute -top-4 -left-4 px-2 py-0.5 text-xs font-light uppercase text-amber-500 bg-amber-100 rounded-full"
+                    title="I created this Web App"
+                >
+                    That's Me
+                </span>
+            )}
             <div className="grid grid-cols-[auto_1fr] gap-4 md:row-start-1 md:col-span-2 md:gap-x-8">
                 <img
                     className="w-16 h-16 sm:w-28 sm:h-28 md:w-40 md:h-40 md:row-span-2 rounded-full object-top object-cover"

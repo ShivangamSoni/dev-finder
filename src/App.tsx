@@ -9,6 +9,7 @@ import { useLocalStorage } from "@hooks/useLocalStorage";
 import Header from "@components/Header";
 import SearchBar from "@components/SearchBar";
 import User, { type UserData } from "@components/User";
+import Footer from "@components/Footer";
 
 import LoadingSpinner from "@components/LoadingSpinner";
 import Section from "@layouts/Section";
@@ -83,6 +84,7 @@ export default function App() {
                         )}
                     </Section>
                 </main>
+                <Footer loadMyProfile={setUsername} />
             </div>
         </div>
     );
