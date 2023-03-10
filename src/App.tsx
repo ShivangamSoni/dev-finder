@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { request } from "@octokit/request";
+
+import { toast } from "react-hot-toast";
 
 import Header from "@components/Header";
 import SearchBar from "@components/SearchBar";
@@ -7,8 +10,6 @@ import User, { type UserData } from "@components/User";
 
 import LoadingSpinner from "@components/LoadingSpinner";
 import Section from "@layouts/Section";
-
-import { useEffect, useState } from "react";
 
 export default function App() {
     const [username, setUsername] = useState("ShivangamSoni");
@@ -25,6 +26,7 @@ export default function App() {
                 });
                 return data;
             } catch {
+                toast.error(`"${username.toUpperCase()}" doesn't exist`);
                 return userData as UserData;
             }
         },
