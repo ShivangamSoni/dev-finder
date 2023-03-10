@@ -12,6 +12,8 @@ export default function SearchBar({
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
+        if (username.trim().length === 0) return;
+
         onSubmit(username);
         setUsername("");
     }

@@ -31,6 +31,7 @@ export default function App() {
                 return data;
             } catch {
                 toast.error(`"${username.toUpperCase()}" doesn't exist`);
+                setUsername(userData!.login);
                 return userData as UserData;
             }
         },
@@ -48,10 +49,6 @@ export default function App() {
     }, [theme]);
 
     useEffect(() => {
-        refetch();
-    }, [username]);
-
-    useEffect(() => {
         const body = document.body;
         if (theme === "dark") {
             body.classList.add("dark");
@@ -59,6 +56,11 @@ export default function App() {
             body.classList.remove("dark");
         }
     }, [theme]);
+
+    function searchUser(username: string) {
+        setUsername(username);
+        refetch();
+    }
 
     return (
         <div className="font-space min-h-screen bg-lightBlue50 text-grey dark:bg-darkBlue500 dark:text-white flex items-center justify-center py-8">
@@ -73,7 +75,7 @@ export default function App() {
                     <Section>
                         <SearchBar
                             isLoading={isLoading}
-                            onSubmit={setUsername}
+                            onSubmit={searchUser}
                         />
                     </Section>
                     <Section className="p-6">
@@ -84,7 +86,7 @@ export default function App() {
                         )}
                     </Section>
                 </main>
-                <Footer loadMyProfile={setUsername} />
+                <Footer loadMyProfile={searchUser} />
             </div>
         </div>
     );
