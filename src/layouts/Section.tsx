@@ -7,7 +7,7 @@ export default function Section({
 }: DetailedHTMLProps<HtmlHTMLAttributes<HTMLElement>, HTMLElement>) {
     return (
         <section
-            className={`p-2 bg-darkBlue300 text-sm rounded-lg ${className}`}
+            className={`p-2 bg-white dark:bg-darkBlue300 text-sm rounded-lg shadow-lg ${className}`}
             {...props}
         >
             {children}
